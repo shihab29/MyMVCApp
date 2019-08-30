@@ -1,0 +1,88 @@
+﻿@model IEnumerable<MyMVCWebApp.Models.Student>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Create</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link" href="/student/create"> Create <span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" href="/student"> Index </a>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(m => m.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(m => m.Id)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(m => m.Section)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(m => m.Gender)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(m => m.IsAMemberOfAnyClub)
+                    </th>
+                    <th>
+                        Action
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var student in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(m => student.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => student.Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => student.Section)
+                        </td>
+                        <td>
+                            @*@Html.DisplayFor(m => student.Gender)*@
+                            @if (student.Gender == "m")
+                            {
+                                <p>male</p>
+                            }
+                            else
+                            {
+                                <p>female</p>
+                            }
+                        </td>
+                        <td>
+                            @Html.DisplayTextFor(m => student.IsAMemberOfAnyClub)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = student.Id }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = student.Id })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

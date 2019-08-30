@@ -1,0 +1,54 @@
+﻿@model MyMVCWebApp.ViewModel.StudentViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Create</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link" href="/student/create"> Create <span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" href="/student"> Index </a>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        @using (Html.BeginForm("CreateStudent", "Student"))
+        {
+            <div class="form-group">
+                @Html.LabelFor(m => m.Student.Name)
+                @Html.TextBoxFor(m => m.Student.Name, new { @class = "form-control", @style = "background-color: blue" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Student.Id)
+                @Html.TextBoxFor(m => m.Student.Id, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Student.Section)
+                @Html.DropDownListFor(m => m.Student.Section, new SelectList(Model.SectionList, "Value", "Text"), "Select something", new { @class = "form-control" })
+            </div>
+            <div class="checkbox">
+                @Html.CheckBoxFor(m => m.Student.IsAMemberOfAnyClub) Is a member of any club
+            </div>
+            <div class="form-check form-check-inline">
+                @Html.RadioButtonFor(m => m.Student.Gender, "m", new { @class = "form-check-input" }) Male &nbsp;
+                @Html.RadioButtonFor(m => m.Student.Gender, "f", new { @class = "form-check-input" }) Female
+            </div><br />
+            @Html.HiddenFor(m => m.IsCreate)
+            <button type="submit" class="btn btn-success">Submit</button>
+        }
+    </div>
+</body>
+</html>
